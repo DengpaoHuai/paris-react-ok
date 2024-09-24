@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import CardCounter from "./components/CardCounter";
+import { Planet } from "./types/planets.type";
 
 function App() {
-  const [demo, setDemo] = useState(1);
-  const [planets, setPlanets] = useState([]);
+  const [planets, setPlanets] = useState<Array<Planet>>([]);
 
   useEffect(() => {
     fetch("https://swapi.dev/api/planets")
@@ -21,23 +20,6 @@ function App() {
 
   return (
     <>
-      <button
-        onClick={() => {
-          setDemo(demo + 1);
-        }}
-      >
-        increment
-      </button>
-      <CardCounter
-        customStyle={{
-          padding: "10px",
-          borderRadius: "10px",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-        }}
-        mafunctionmetier={() => console.log("youpi")}
-      >
-        {demo}
-      </CardCounter>
       {planets.map((planet) => {
         return (
           <div key={planet.name}>
