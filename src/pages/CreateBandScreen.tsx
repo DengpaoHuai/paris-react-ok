@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -18,23 +17,10 @@ const CreateBandScreen = () => {
   const {
     handleSubmit,
     register,
-    setValue,
-    watch,
     formState: { errors },
   } = useForm<BandForm>({
     resolver: zodResolver(bandSchema),
   });
-
-  const name = watch("name");
-
-  useEffect(() => {
-    console.log("reload");
-    if (!name) return;
-    console.log("name changed");
-    setValue("name", name.toUpperCase());
-  }, [name]);
-
-  console.log(name);
 
   const submit = (values: BandForm) => {
     console.log(values);
