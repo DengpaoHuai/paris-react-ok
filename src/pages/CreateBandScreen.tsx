@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const bandSchema = z.object({
@@ -21,18 +22,21 @@ const CreateBandScreen = () => {
   } = useForm<BandForm>({
     resolver: zodResolver(bandSchema),
   });
+  const navigate = useNavigate();
 
   const submit = (values: BandForm) => {
     console.log(values);
-    /* 
-    https://crudcrud.com/api/
-    fetch('url', {
-      method : 'POST',
-      headers : {
-        'Content-Type' : 'application/json'
+
+    fetch("https://crudcrud.com/api/600d08470983477a8e5aa75ab93ea37d/bands", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body : JSON.stringify(values)
-    })*/
+      body: JSON.stringify(values),
+    }).then(() => {
+      console.log("Band created");
+      navigate("/bands");
+    });
   };
 
   return (

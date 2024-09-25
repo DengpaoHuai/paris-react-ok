@@ -3,6 +3,7 @@ import PlanetList from "../pages/PlanetList";
 import DemoScreen from "../pages/DemoScreen";
 import PlanetList1 from "../pages/PlanetList-useFetch";
 import CreateBandScreen from "../pages/CreateBandScreen";
+import BandListScreen from "../pages/BandsListScreen";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/create-band",
     element: <CreateBandScreen></CreateBandScreen>,
+  },
+  {
+    path: "/bands",
+    element: <BandListScreen></BandListScreen>,
   },
 ]);
 
