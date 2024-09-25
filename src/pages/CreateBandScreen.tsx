@@ -2,6 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { Band } from "../types/band.type";
+import { createBand } from "../service/band.service";
+import { useState } from "react";
 
 const bandSchema = z.object({
   name: z.string(),
@@ -12,31 +15,32 @@ const bandSchema = z.object({
     .max(5, "Maximum 5"),
 });
 
-type BandForm = z.infer<typeof bandSchema>;
-
 const CreateBandScreen = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<BandForm>({
+  } = useForm<Omit<Band, "_id">>({
     resolver: zodResolver(bandSchema),
   });
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
-  const submit = (values: BandForm) => {
+  const submit = async (values: Omit<Band, "_id">) => {
     console.log(values);
-
-    fetch("https://crudcrud.com/api/600d08470983477a8e5aa75ab93ea37d/bands", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    }).then(() => {
-      console.log("Band created");
+    try {
+      await createBand(values);
       navigate("/bands");
-    });
+      //narrowing
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else if (typeof error === "string") {
+        setError(error);
+      } else {
+        setError("An error occured");
+      }
+    }
   };
 
   return (
