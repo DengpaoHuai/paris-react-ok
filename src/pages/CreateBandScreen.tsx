@@ -24,6 +24,15 @@ const CreateBandScreen = () => {
 
   const submit = (values: BandForm) => {
     console.log(values);
+    /* 
+    https://crudcrud.com/api/
+    fetch('url', {
+      method : 'POST',
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      body : JSON.stringify(values)
+    })*/
   };
 
   return (
