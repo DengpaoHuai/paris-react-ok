@@ -5,6 +5,7 @@ import { Band } from "../types/band.type";
 type BandContextType = {
   band: Band[];
   addBand: (newBand: Band) => void;
+  deleteBand: (id: string) => void;
 };
 
 export const BandContext = createContext<BandContextType>(
@@ -23,8 +24,12 @@ const BandContextProvider = ({ children }: { children: ReactNode }) => {
     setBand([...band, newBand]);
   };
 
+  const deleteBand = (id: string) => {
+    setBand(band.filter((band) => band._id !== id));
+  };
+
   return (
-    <BandContext.Provider value={{ band, addBand }}>
+    <BandContext.Provider value={{ band, addBand, deleteBand }}>
       {children}
     </BandContext.Provider>
   );

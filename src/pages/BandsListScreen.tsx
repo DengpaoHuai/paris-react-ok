@@ -4,11 +4,11 @@ import { useContext } from "react";
 import { BandContext } from "../contexts/BandContextProvider";
 
 const BandListScreen = () => {
-  const { band } = useContext(BandContext);
+  const { band, deleteBand: deleteBandById } = useContext(BandContext);
 
   const deleteItem = async (id: string) => {
     deleteBand(id).then(() => {
-      //   refetch();
+      deleteBandById(id);
     });
   };
 
