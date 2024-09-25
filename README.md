@@ -1,8 +1,5 @@
-1. soumettre votre groupe
-2. créer la page de liste
-3. rediriger
-4. liste les éléments
-5. supprimer un élément
+1. création reliée à zustand
+2. suppression
 
 aef2c227ddc548889e87dec279333618
 

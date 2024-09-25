@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
-import useBands from "../store/useBands";
+import { deleteBand } from "../service/band.service";
+import { useContext } from "react";
+import { BandContext } from "../contexts/BandContextProvider";
 
 const BandListScreen = () => {
-  const { bands, isLoading } = useBands();
+  const { band, deleteBand: deleteBandById } = useContext(BandContext);
+
+  const deleteItem = async (id: string) => {
+    deleteBand(id).then(() => {
+      deleteBandById(id);
+    });
+  };
 
   return (
     <div>
-      {isLoading && <p>chargement...</p>}
       <h1>Bands</h1>
       <Link to="/create-band">Create a band</Link>
-      {bands?.map((band) => {
+      {band?.map((band) => {
         return (
           <div key={band._id}>
             <h2>{band.name}</h2>
