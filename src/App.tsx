@@ -1,11 +1,14 @@
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./router/router";
+import BandContextProvider from "./contexts/BandContextProvider";
 
 function App() {
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      <BandContextProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </BandContextProvider>
     </>
   );
 }

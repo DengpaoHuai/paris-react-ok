@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-import { Band } from "../types/band.type";
 import { deleteBand } from "../service/band.service";
+import { useContext } from "react";
+import { BandContext } from "../contexts/BandContextProvider";
 
 const BandListScreen = () => {
-  const { data, refetch } = useFetch<Band[]>(
-    "https://crudcrud.com/api/600d08470983477a8e5aa75ab93ea37d/bands"
-  );
+  const { band } = useContext(BandContext);
 
   const deleteItem = async (id: string) => {
     deleteBand(id).then(() => {
-      refetch();
+      //   refetch();
     });
   };
 
@@ -18,7 +16,7 @@ const BandListScreen = () => {
     <div>
       <h1>Bands</h1>
       <Link to="/create-band">Create a band</Link>
-      {data?.map((band) => {
+      {band?.map((band) => {
         return (
           <div key={band._id}>
             <h2>{band.name}</h2>
