@@ -5,13 +5,20 @@ import { useEffect, useState } from "react";
 
 type UseBands = {
   bands: Band[];
-  setAllBands: () => Promise<void>;
+  setAllBands: (bands: Band[]) => void;
+  createBand: (band: Band) => void;
+  deleteBand: (id: string) => void;
 };
 const useBandsStore = create<UseBands>((set) => ({
   bands: [],
-  setAllBands: async () => {
-    const bands = await getBands();
+  setAllBands: (bands: Band[]) => {
     set({ bands: bands });
+  },
+  createBand: (band: Band) => {
+    set((state) => ({ bands: [...state.bands, band] }));
+  },
+  deleteBand: (id: string) => {
+    set((state) => ({ bands: state.bands.filter((band) => band._id !== id) }));
   },
 }));
 
@@ -20,11 +27,12 @@ const useBands = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (bands.length) return;
     setIsLoading(true);
-    if (!bands.length)
-      setAllBands().then(() => {
-        setIsLoading(false);
-      });
+    getBands().then((bands) => {
+      setAllBands(bands);
+      setIsLoading(false);
+    });
   }, []);
 
   return {

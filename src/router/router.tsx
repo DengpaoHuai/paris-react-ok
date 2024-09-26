@@ -1,9 +1,12 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import PlanetList from "../pages/PlanetList";
 import DemoScreen from "../pages/DemoScreen";
 import PlanetList1 from "../pages/PlanetList-useFetch";
 import CreateBandScreen from "../pages/CreateBandScreen";
 import BandListScreen from "../pages/BandsListScreen";
+import PlanetListRefacto from "../pages/PlanetListRefacto";
+import PlanetListQuery from "../pages/PlanetListQuery";
+import { Suspense } from "react";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,24 @@ const router = createBrowserRouter([
   {
     path: "/bands",
     element: <BandListScreen></BandListScreen>,
+  },
+  {
+    loader: async () => {
+      const response = await fetch("https://swapi.dev/api/planets");
+      const data = await response.json();
+      redirect("/refacto");
+      return data.results;
+    },
+    path: "/refacto",
+    element: <PlanetListRefacto></PlanetListRefacto>,
+  },
+  {
+    path: "/query",
+    element: (
+      <Suspense fallback={<p>chargement...</p>}>
+        <PlanetListQuery></PlanetListQuery>
+      </Suspense>
+    ),
   },
 ]);
 

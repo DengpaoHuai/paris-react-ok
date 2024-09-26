@@ -22,10 +22,24 @@ function PlanetList() {
 
   useEffect(() => {
     getPlanets(`https://swapi.dev/api/planets`);
+
+    const monCustomListener = (e: Event) => {
+      console.log(e);
+    };
+    document.addEventListener("scroll", monCustomListener);
+    return () => {
+      console.log("coucou je me démonte");
+      document.removeEventListener("scroll", monCustomListener);
+    };
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        height: "500vh",
+      }}
+    >
+      <a href="/demo">Go to demo</a>
       <Link to="/demo">Go to demo</Link>
       <button onClick={() => navigate("/demo")}>Go to demo</button>
       {loading ? (
@@ -58,7 +72,7 @@ function PlanetList() {
       >
         next
       </button>
-    </>
+    </div>
   );
 }
 

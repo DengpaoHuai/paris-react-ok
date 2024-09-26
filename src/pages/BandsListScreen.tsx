@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import useBands from "../store/useBands";
+import { deleteBand } from "../service/band.service";
 
 const BandListScreen = () => {
-  const { bands, isLoading } = useBands();
+  const { bands, isLoading, deleteBand: removeBand } = useBands();
+
+  const deleteItem = (id: string) => {
+    deleteBand(id).then(() => {
+      removeBand(id);
+    });
+  };
 
   return (
     <div>

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Band } from "../types/band.type";
 import { createBand } from "../service/band.service";
-import { useState } from "react";
-import useBands from "../store/useBands";
+import { useContext, useState } from "react";
+import { BandContext } from "../contexts/BandContextProvider";
 
 const bandSchema = z.object({
   name: z.string(),
@@ -23,13 +23,10 @@ const CreateBandScreen = () => {
     formState: { errors },
   } = useForm<Omit<Band, "_id">>({
     resolver: zodResolver(bandSchema),
-    defaultValues: {
-      name: "toto",
-    },
   });
   const [, setError] = useState<string>("");
   const navigate = useNavigate();
-  const { createBand: addBand } = useBands();
+  const { addBand } = useContext(BandContext);
 
   const submit = async (values: Omit<Band, "_id">) => {
     console.log(values);
