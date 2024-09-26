@@ -5,7 +5,7 @@ import BandContextProvider from "./contexts/BandContextProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 //import { store } from "./store/store";
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5000,

@@ -7,6 +7,9 @@ import BandListScreen from "../pages/BandsListScreen";
 import PlanetListRefacto from "../pages/PlanetListRefacto";
 import PlanetListQuery from "../pages/PlanetListQuery";
 import { Suspense } from "react";
+import UpdateBandScreen from "../pages/UpdateBandScreen";
+import { getBandById } from "../service/band.service";
+import { queryClient } from "../App";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +49,30 @@ const router = createBrowserRouter([
         <PlanetListQuery></PlanetListQuery>
       </Suspense>
     ),
+  },
+  /* {
+    loader: async ({ params }) => {
+      const id = params.id;
+      if (!id) return redirect("/bands");
+      const data = await getBandById(id);
+      return data;
+    },
+    path: "/update-band/:id",
+    element: <UpdateBandScreen></UpdateBandScreen>,
+  },*/
+  {
+    loader: async ({ params }) => {
+      const id = params.id;
+      if (!id) return redirect("/bands");
+
+      await queryClient.prefetchQuery({
+        queryKey: ["band", id],
+        queryFn: () => getBandById(id),
+      });
+      return true;
+    },
+    path: "/update-band/:id",
+    element: <UpdateBandScreen></UpdateBandScreen>,
   },
 ]);
 

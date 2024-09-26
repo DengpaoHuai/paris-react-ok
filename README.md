@@ -1,3 +1,5 @@
-1. changer la liste des bands pour ajouter tanstack query ♥
-2. Créer la page d'update : avec le formulaire prérempli : attention pas de zustand (ni valtio) ok pour redux (seulement avec les thunk actions)
-3. Réaliser l'update
+https://github.com/alan2207/bulletproof-react/tree/master
+
+1. Je veux pouvoir avoir une popup appellable n'importe où dans mon projet.
+2. Créer un context
+3. Pouvoir modifier le titre et la description partout où l'on se trouve dans l'app

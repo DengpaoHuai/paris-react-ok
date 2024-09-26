@@ -2,7 +2,7 @@ import { Band } from "../types/band.type";
 
 export const createBand = async (band: Omit<Band, "_id">) => {
   const response = await fetch(
-    "https://crudcrud.com/api/5d30c2a62a0d45d3a8a572a527affd81/bands",
+    "https://crudcrud.com/api/95189b15728e4c70b9ca741301bc143b/bands",
     {
       method: "POST",
       headers: {
@@ -17,16 +17,37 @@ export const createBand = async (band: Omit<Band, "_id">) => {
 
 export const getBands = async () => {
   const response = await fetch(
-    "https://crudcrud.com/api/5d30c2a62a0d45d3a8a572a527affd81/bands"
+    "https://crudcrud.com/api/95189b15728e4c70b9ca741301bc143b/bands"
   );
   return response.json();
 };
 
 export const deleteBand = async (id: string) => {
   await fetch(
-    `https://crudcrud.com/api/5d30c2a62a0d45d3a8a572a527affd81/bands/${id}`,
+    `https://crudcrud.com/api/95189b15728e4c70b9ca741301bc143b/bands/${id}`,
     {
       method: "DELETE",
     }
   );
+};
+
+export const getBandById = async (id: string) => {
+  const response = await fetch(
+    `https://crudcrud.com/api/95189b15728e4c70b9ca741301bc143b/bands/${id}`
+  );
+  return response.json();
+};
+
+export const updateBand = async (id: string, band: Omit<Band, "_id">) => {
+  const response = await fetch(
+    `https://crudcrud.com/api/95189b15728e4c70b9ca741301bc143b/bands/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(band),
+    }
+  );
+  return true;
 };
