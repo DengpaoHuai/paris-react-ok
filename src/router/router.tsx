@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     element: <PlanetListRefacto></PlanetListRefacto>,
   },
   {
-    path: "/query",
+    path: "/query/:id",
     element: (
       <Suspense fallback={<p>chargement...</p>}>
         <PlanetListQuery></PlanetListQuery>

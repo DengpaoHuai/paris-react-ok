@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { PlanetResponse } from "../types/planets.type";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { getPlanets } from "../service/planet.service";
 
 function PlanetListQuery() {
+  const { id } = useParams();
   const [page, setPage] = useState(1);
   const { data } = useSuspenseQuery({
     queryKey: ["planets", page],

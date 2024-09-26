@@ -1,6 +1,3 @@
-1. création reliée à zustand
-2. suppression
-
-aef2c227ddc548889e87dec279333618
-
-3589df2e11eb4700a1a38835ae328fb7
+1. changer la liste des bands pour ajouter tanstack query ♥
+2. Créer la page d'update : avec le formulaire prérempli : attention pas de zustand (ni valtio) ok pour redux (seulement avec les thunk actions)
+3. Réaliser l'update
